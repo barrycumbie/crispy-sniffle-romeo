@@ -27,7 +27,7 @@ app.post('/gmail', (req, res) => {
     service: 'gmail',
     auth: {
       user: 'barrycumbie@gmail.com',
-      pass: req.body.pwd
+      pass: process.env.APP_PWD
     }
   });
 
