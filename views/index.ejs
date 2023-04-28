@@ -1,6 +1,18 @@
-Hello <%= userName %>
+<p> 
+Hello,
+
+This sends a TEXT MESSAGE 💬 
+from <%= userName %>'s 📧. 
+Bet. 
+</p>
 
 <form method="post" action="/gmail">
-    <input name="pwd" type="password">
+    <input name="phoneNumber" type="text" placeholder="phone number">
+    <input name="message" type="textarea" placeholder="message">
+    <br/>
+    <input type="radio" id="att" name="carrier" value="att" checked>
+<label for="att">Ahe Tee And Tea</label><br>
+<input type="radio" id="verizon" name="carrier" value="verizon">
+<label for="verizon">Very Eye Zahn</label><br>
     <button type="submit">submit</button>
 </form>

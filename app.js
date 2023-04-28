@@ -1,7 +1,7 @@
 require('dotenv').config()
 const express = require('express')
 const app = express()
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 5500
 const nodemailer = require('nodemailer')
 
 app.use(express.json());
@@ -21,9 +21,20 @@ app.get('/',  (req, res) => {
 
 app.post('/gmail', (req, res) => {
 
-  console.log(req.body.pwd); 
+  let request = req.body; 
+  let atCarrier = ''; 
 
-  var transporter = nodemailer.createTransport({
+  switch (request.carrier) {
+    case 'att':
+      atCarrier = "@txt.att.net";
+      break;
+    case 'verizon':
+      atCarrier = "@vtext.com	";
+      break;
+  }
+
+
+  let transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
       user: 'barrycumbie@gmail.com',
@@ -33,9 +44,9 @@ app.post('/gmail', (req, res) => {
 
   var mailOptions = {
     from: 'barrycumbie@gmail.com',
-    to: 'barrycumbie@gmail.com',
-    subject: 'Sending Email using Node.js',
-    text: 'That was easy!'
+    to: request.phoneNumber + atCarrier, 
+    text: request.message,
+  
   };
 
   transporter.sendMail(mailOptions, function(error, info){
